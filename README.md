@@ -36,7 +36,7 @@ Kara     | 06 | 07 | 22 | 76 |
 Savanes  | 04 | 07 | 16 | 69 |
 
 ## Contributions
-[Directives de contribution](https://github.com/Togodevelopers/Api_commune_Togo/blob/master/.github/CONTRIBUTING.md)
+[Directives de contribution](https://github.com/gausoft/Subdivision_administrative_Togo/blob/main/.github/CONTRIBUTING.md)
 
 ## License
 La **Base de données des communes préfectures et villes du Togo** est disponible sous la licence [Open Database License](https://github.com/Togodevelopers/Api_commune_Togo/blob/master/LICENSE). Tous les droits sur le contenu individuel de la base de données sont régis par la [Database Contents License](https://github.com/Togodevelopers/Api_commune_Togo/blob/master/.github/CONTENT_LICENSE).

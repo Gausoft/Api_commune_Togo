@@ -1,0 +1,33 @@
+version: '3.8'
+services:
+  postgres:
+    image: postgres:latest
+    restart: always
+    container_name: minicipalities_db
+    ports:
+      - "9090:5432"
+    environment:
+      - POSTGRES_USER=${DATABASE_USER:-postgres}
+      - POSTGRES_PASSWORD=${DATABASE_PASSWORD:-postgres}
+      - POSTGRES_DB=${DATABASE_NAME:-minicipalities_db}
+    volumes:
+      - minicipalities_db:/var/lib/postgresql/data
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    ports:
+      - "7070:80"
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@example.com
+      - PGADMIN_DEFAULT_PASSWORD=adminpassword
+      - PGADMIN_LISTEN_HOST=0.0.0.0
+    depends_on:
+      - postgres
+    networks:
+      - pg_network
+
+volumes:
+  minicipalities_db:
+
+networks:
+  pg_network:

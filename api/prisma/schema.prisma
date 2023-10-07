@@ -1,0 +1,72 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Region {
+  id          Int      @id @default(autoincrement())
+  code        String   @unique
+  nom         String   @unique
+  latitude    Float?
+  longitude   Float?
+  superficie  Float?
+  population  Int?
+  villes      City[]
+  prefectures Prefecture[]
+
+  @@map("regions")
+}
+
+model City {
+  id          Int      @id @default(autoincrement())
+  nom         String   @unique
+  superficie  Float?
+  population  Float?
+  region_id   Int
+  region      Region   @relation(fields: [region_id], references: [id])
+
+  @@map("cities")
+}
+
+model Prefecture {
+  id          Int     @id @default(autoincrement())
+  nom         String  @unique
+  chef_lieu   String
+  latitude    Float?
+  longitude   Float?
+  region_id   Int
+  region      Region  @relation(fields: [region_id], references: [id])
+  municipalities Municipality[]
+  cantons Canton[]
+
+  @@map("prefectures")
+}
+
+model Municipality {
+  id           Int      @id @default(autoincrement())
+  nom          String   @unique
+  latitude     Float?
+  longitude    Float?
+  population   Float?
+  superficie   Float?
+  prefecture   Prefecture @relation(fields: [prefecture_id], references: [id])
+  prefecture_id Int
+
+  @@map("minicipalities")
+}
+
+model Canton {
+  id           Int      @id @default(autoincrement())
+  nom          String
+  prefecture_id Int
+  prefecture   Prefecture @relation(fields: [prefecture_id], references: [id])
+
+  @@map("cantons")
+}
